@@ -166,11 +166,16 @@ def show_box(box, ax):
     ax.add_patch(plt.Rectangle((x0, y0), w, h, edgecolor='blue', facecolor=(0,0,0,0), lw=2)) 
 
 @torch.inference_mode()
-def get_sam_prediction(sam_model,image,bbox,full_bbox=False):
+def get_sam_prediction(sam_model,image,bbox,full_bbox=False,is_sam=False):
     sam_model.eval()
     sam_trans = ResizeLongestSide(sam_model.image_encoder.img_size)
     #trans_image = image.unsqueeze(0).to(device)
-    trans_image = sam_trans.apply_image_torch(image)
+    if not is_sam:
+        trans_image = sam_trans.apply_image_torch(image)
+    else:
+        
+        input_image = sam_trans.apply_image_torch(image)
+        trans_image = sam_model.preprocess(input_image.to(device))
     if bbox is not None:
         box = sam_trans.apply_boxes(bbox, (256, 256))
         box_tensor = torch.as_tensor(box, dtype=torch.float, device=device)
