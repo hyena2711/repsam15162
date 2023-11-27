@@ -25,7 +25,7 @@ To answer *Q1*, we perform experiments on eight medical datasets with different 
 ## Data preparation
 * For MSD datasets, download the dataset from [Medical Segmentation Decathlon(MSD)](http://medicaldecathlon.com/) site.
 * Set path of the dataset directory and run `python prepare_2D_data.py`. This will create train and test directories based on the label ids.using the `dataset.json` file from MSD. 
-<br/>
+
 * For MedSAM2d, download the [dataset](https://zenodo.org/record/7860267)  and unzip it. Process it to create gallbladder segmentation as described in [MedSAM](https://github.com/bowang-lab/MedSAM/tree/0.1).
 
 * For ISIC, download the 2017 challenge datasets from [ISIC Challenge](https://challenge.isic-archive.com/data/#2017) site. 
